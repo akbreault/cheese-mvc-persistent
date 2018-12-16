@@ -23,11 +23,18 @@ public class Menu {
     @ManyToMany
     private List<Cheese> cheeses;
 
+    public Menu(String name, int id) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Menu() {}
 
     public void addItem(Cheese item) { cheeses.add(item); }
 
     public int getId() { return id; }
+
+    public void setId() { this.id = id; }
 
     public String getName() { return name; }
 

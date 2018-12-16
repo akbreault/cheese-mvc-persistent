@@ -13,20 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
-/**
- * Created by LaunchCode
- */
 @Controller
 @RequestMapping("category")
 public class CategoryController {
 
     @Autowired
-    CategoryDao categoryDao;
+    private CategoryDao categoryDao;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model, @RequestParam(defaultValue = "0") int id) {
         model.addAttribute("title", "Categories");
         model.addAttribute("categories", categoryDao.findAll());
+
         return "category/index";
     }
 
@@ -34,12 +32,12 @@ public class CategoryController {
     public String add(Model model) {
         model.addAttribute(new Category());
         model.addAttribute("title", "Add Category");
+
         return "category/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid Category category, Errors errors) {
-
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Category");
             return "category/add";
@@ -48,5 +46,14 @@ public class CategoryController {
         categoryDao.save(category);
         return "redirect:";
     }
+
+
+
+
+
+
+
+
+
 
 }
